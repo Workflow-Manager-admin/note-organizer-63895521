@@ -3,16 +3,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:notes_frontend/main.dart';
 
 void main() {
-  testWidgets('App generation message displayed', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Minimal smoke: NotesApp renders', (WidgetTester tester) async {
+    await tester.pumpWidget(const NotesApp());
 
-    expect(find.text('notes_frontend App is being generated...'), findsOneWidget);
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    // Should find some widget with "Notes" in its text (app bar etc.)
+    expect(find.textContaining('Notes'), findsWidgets);
   });
 
-  testWidgets('App bar has correct title', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
-
-    expect(find.text('notes_frontend'), findsOneWidget);
+  testWidgets('FAB exists in initial load', (WidgetTester tester) async {
+    await tester.pumpWidget(const NotesApp());
+    expect(find.byIcon(Icons.add), findsOneWidget);
   });
 }
